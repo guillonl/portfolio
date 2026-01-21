@@ -2,6 +2,7 @@
 
 import { ReactNode } from 'react'
 import { TableOfContents } from './TableOfContents'
+import { Container } from '@/components/ui/Container'
 import { TocItem } from '@/lib/projects'
 
 interface ProjectLayoutProps {
@@ -11,18 +12,16 @@ interface ProjectLayoutProps {
 
 export function ProjectLayout({ children, headings }: ProjectLayoutProps) {
   return (
-    <div className="max-w-5xl mx-auto px-4">
-      <div className="lg:grid lg:grid-cols-[200px_1fr] lg:gap-16">
-        {/* Navigation latérale */}
-        <aside className="hidden lg:block">
-          <TableOfContents items={headings} />
-        </aside>
+    <>
+      {/* Navigation latérale fixe - n'affecte pas le flow */}
+      <TableOfContents items={headings} />
 
-        {/* Contenu principal */}
-        <main className="max-w-[550px]">
+      {/* Contenu centré exactement comme la home */}
+      <Container>
+        <main>
           {children}
         </main>
-      </div>
-    </div>
+      </Container>
+    </>
   )
 }

@@ -40,7 +40,7 @@ export function TableOfContents({ items }: TableOfContentsProps) {
   if (items.length === 0) return null
 
   return (
-    <nav className="hidden lg:block sticky top-8">
+    <nav className="hidden lg:block fixed left-8 top-32 w-[180px]">
       <Link
         href="/"
         className="flex items-center gap-2 text-sm text-muted hover:text-foreground transition-colors mb-8"
