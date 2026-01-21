@@ -42,6 +42,28 @@ export async function getProjectsByCategory(
   return projects.filter((p) => p.category === category)
 }
 
+export interface TocItem {
+  id: string
+  title: string
+}
+
+export function extractHeadings(content: string): TocItem[] {
+  const headingRegex = /^## (.+)$/gm
+  const headings: TocItem[] = []
+  let match
+
+  while ((match = headingRegex.exec(content)) !== null) {
+    const title = match[1]
+    const id = title
+      .toLowerCase()
+      .replace(/[^a-z0-9]+/g, '-')
+      .replace(/(^-|-$)/g, '')
+    headings.push({ id, title })
+  }
+
+  return headings
+}
+
 export async function getProjectBySlug(slug: string) {
   const fullPath = path.join(projectsDirectory, `${slug}.mdx`)
 
@@ -51,6 +73,7 @@ export async function getProjectBySlug(slug: string) {
 
   const fileContents = fs.readFileSync(fullPath, 'utf8')
   const { data, content } = matter(fileContents)
+  const headings = extractHeadings(content)
 
   return {
     meta: {
@@ -62,5 +85,6 @@ export async function getProjectBySlug(slug: string) {
       featured: data.featured ?? false,
     },
     content,
+    headings,
   }
 }

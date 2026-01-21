@@ -118,11 +118,45 @@ Ce document retrace le processus de création du portfolio de Leo Guillon, depui
 - Réseaux sociaux en bas de page
 - Header simplifié (juste "Home" + toggle thème)
 
-**Nouvelle structure** :
+**Structure** :
 ```
 /              → Bio + Filtres + Projets + Footer
 /projects/[slug] → Détail projet
 ```
+
+### Version 3 - Amélioration UI (demande utilisateur)
+
+**Modifications demandées** :
+1. Enlever "Home" du header, mettre juste une icône retour sur les pages projet
+2. Navigation latérale sur les pages projet (comme benji.org)
+3. Titres en 14px gras (pas plus grand)
+4. Arrondis de 4px partout
+5. Créer un Design System documenté
+
+**Nouvelles fonctionnalités** :
+- **Header contextuel** : Vide sur la home, icône retour (←) avec fond grisé sur les pages projet
+- **Table of Contents** : Navigation latérale sticky sur les pages projet, avec indicateur animé
+- **Design System** : Fichier DESIGN_SYSTEM.md documentant toutes les règles UI
+
+**Structure page projet (desktop)** :
+```
+┌─────────────────────────────────────────┐
+│  [←]                    [ThemeToggle]   │
+├─────────────────────────────────────────┤
+│  ← Index     │  Titre (14px, gras)      │
+│              │  Date                     │
+│  Section 1   │                          │
+│  Section 2   │  Contenu MDX...          │
+│  Section 3   │                          │
+│  (sticky)    │                          │
+└─────────────────────────────────────────┘
+```
+
+**Nouveaux fichiers** :
+- `components/projects/TableOfContents.tsx` - Navigation latérale
+- `components/projects/ProjectLayout.tsx` - Layout page projet
+- `components/mdx/MDXComponents.tsx` - Composants MDX personnalisés
+- `DESIGN_SYSTEM.md` - Documentation des règles UI
 
 ---
 
@@ -135,29 +169,34 @@ portfolio/
 │   ├── page.tsx                # Home (bio + projets + footer)
 │   ├── globals.css             # Styles + tokens
 │   └── projects/
-│       └── [slug]/page.tsx     # Page projet individuel
+│       └── [slug]/page.tsx     # Page projet avec nav latérale
 ├── components/
 │   ├── ui/
 │   │   ├── Container.tsx       # Container 550px
 │   │   └── ThemeToggle.tsx     # Switch thème
 │   ├── layout/
-│   │   └── Header.tsx          # Home + ThemeToggle
+│   │   └── Header.tsx          # Contextuel (vide ou icône retour)
 │   ├── home/
 │   │   └── HomeContent.tsx     # Client component avec state filtres
+│   ├── mdx/
+│   │   └── MDXComponents.tsx   # Composants MDX personnalisés (H2 avec ID)
 │   └── projects/
-│       ├── ProjectCard.tsx     # Item projet
+│       ├── ProjectCard.tsx     # Item projet (4px radius)
 │       ├── ProjectList.tsx     # Liste animée
-│       └── CategoryFilter.tsx  # Filtres state local
+│       ├── CategoryFilter.tsx  # Filtres state local
+│       ├── TableOfContents.tsx # Navigation latérale sticky
+│       └── ProjectLayout.tsx   # Layout page projet
 ├── content/
 │   └── projects/               # Fichiers MDX
 ├── lib/
-│   ├── projects.ts             # Utilitaires fetch projets
+│   ├── projects.ts             # Utilitaires + extraction headings
 │   └── utils.ts                # cn(), formatDate()
 ├── public/
 │   └── resources/              # Fichiers téléchargeables
 ├── types/
 │   └── project.ts              # Types TypeScript
-└── DOCUMENTATION.md            # Ce fichier
+├── DOCUMENTATION.md            # Ce fichier
+└── DESIGN_SYSTEM.md            # Règles UI uniformes
 ```
 
 ---

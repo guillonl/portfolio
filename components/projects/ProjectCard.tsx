@@ -16,7 +16,7 @@ export function ProjectCard({ project }: ProjectCardProps) {
   return (
     <Link
       href={`/projects/${project.slug}`}
-      className="group block py-3 -mx-2 px-2 rounded hover:bg-[var(--color-bg-secondary)] transition-colors"
+      className="group block py-3 -mx-2 px-2 rounded-[4px] hover:bg-[var(--color-bg-secondary)] transition-colors"
     >
       <div className="flex items-center justify-between gap-4">
         <div className="flex items-center gap-3 min-w-0">
