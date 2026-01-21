@@ -1,5 +1,6 @@
 import { Inter } from 'next/font/google'
 import { ThemeProvider } from 'next-themes'
+import { LanguageProvider } from '@/lib/i18n/LanguageContext'
 import { Header } from '@/components/layout/Header'
 import './globals.css'
 
@@ -25,15 +26,17 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning className={inter.variable}>
       <body className="bg-background text-foreground antialiased">
-        <ThemeProvider
-          attribute="class"
-          defaultTheme="system"
-          enableSystem
-          disableTransitionOnChange
-        >
-          <Header />
-          <main>{children}</main>
-        </ThemeProvider>
+        <LanguageProvider>
+          <ThemeProvider
+            attribute="class"
+            defaultTheme="system"
+            enableSystem
+            disableTransitionOnChange
+          >
+            <Header />
+            <main>{children}</main>
+          </ThemeProvider>
+        </LanguageProvider>
       </body>
     </html>
   )

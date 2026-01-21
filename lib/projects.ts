@@ -1,11 +1,25 @@
 import fs from 'fs'
 import path from 'path'
 import matter from 'gray-matter'
-import { ProjectMeta, ProjectCategory } from '@/types/project'
+import { ProjectMeta, ProjectCategory, Language } from '@/types/project'
 
 const projectsDirectory = path.join(process.cwd(), 'content/projects')
 
-export async function getAllProjects(): Promise<ProjectMeta[]> {
+// Extrait la langue et le slug de base depuis le nom de fichier
+// ex: "example-project.fr.mdx" → { slug: "example-project", lang: "fr" }
+function parseFileName(file: string): { slug: string; lang: Language } | null {
+  const match = file.match(/^(.+)\.(fr|en)\.mdx$/)
+  if (match) {
+    return { slug: match[1], lang: match[2] as Language }
+  }
+  // Fallback pour les anciens fichiers sans suffixe de langue (traités comme 'en')
+  if (file.endsWith('.mdx')) {
+    return { slug: file.replace(/\.mdx$/, ''), lang: 'en' }
+  }
+  return null
+}
+
+export async function getAllProjects(lang?: Language): Promise<ProjectMeta[]> {
   if (!fs.existsSync(projectsDirectory)) {
     return []
   }
@@ -13,15 +27,20 @@ export async function getAllProjects(): Promise<ProjectMeta[]> {
   const files = fs.readdirSync(projectsDirectory)
 
   const projects = files
-    .filter((file) => file.endsWith('.mdx'))
     .map((file) => {
-      const slug = file.replace(/\.mdx$/, '')
+      const parsed = parseFileName(file)
+      if (!parsed) return null
+
+      // Si une langue est spécifiée, filtrer
+      if (lang && parsed.lang !== lang) return null
+
       const fullPath = path.join(projectsDirectory, file)
       const fileContents = fs.readFileSync(fullPath, 'utf8')
       const { data } = matter(fileContents)
 
       return {
-        slug,
+        slug: parsed.slug,
+        lang: parsed.lang,
         title: data.title,
         date: data.date,
         category: data.category as ProjectCategory,
@@ -29,6 +48,7 @@ export async function getAllProjects(): Promise<ProjectMeta[]> {
         featured: data.featured ?? false,
       }
     })
+    .filter((p): p is NonNullable<typeof p> => p !== null)
     .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
 
   return projects
@@ -64,8 +84,14 @@ export function extractHeadings(content: string): TocItem[] {
   return headings
 }
 
-export async function getProjectBySlug(slug: string) {
-  const fullPath = path.join(projectsDirectory, `${slug}.mdx`)
+export async function getProjectBySlug(slug: string, lang: Language = 'fr') {
+  // Essayer d'abord avec le suffixe de langue
+  let fullPath = path.join(projectsDirectory, `${slug}.${lang}.mdx`)
+
+  // Fallback vers l'ancien format sans suffixe
+  if (!fs.existsSync(fullPath)) {
+    fullPath = path.join(projectsDirectory, `${slug}.mdx`)
+  }
 
   if (!fs.existsSync(fullPath)) {
     return null
@@ -78,6 +104,7 @@ export async function getProjectBySlug(slug: string) {
   return {
     meta: {
       slug,
+      lang,
       title: data.title,
       date: data.date,
       category: data.category as ProjectCategory,

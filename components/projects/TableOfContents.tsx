@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react'
 import { motion } from 'framer-motion'
 import Link from 'next/link'
 import { cn } from '@/lib/utils'
+import { useLanguage } from '@/lib/i18n/LanguageContext'
 
 interface TocItem {
   id: string
@@ -16,6 +17,7 @@ interface TableOfContentsProps {
 
 export function TableOfContents({ items }: TableOfContentsProps) {
   const [activeId, setActiveId] = useState<string>('')
+  const { t } = useLanguage()
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -40,13 +42,13 @@ export function TableOfContents({ items }: TableOfContentsProps) {
   if (items.length === 0) return null
 
   return (
-    <nav className="hidden lg:block fixed left-8 top-32 w-[180px]">
+    <nav className="hidden lg:block fixed left-8 top-24 w-[180px]">
       <Link
         href="/"
         className="flex items-center gap-2 text-sm text-muted hover:text-foreground transition-colors mb-8"
       >
         <span>←</span>
-        <span>Index</span>
+        <span>{t.nav.index}</span>
       </Link>
       <ul className="space-y-2">
         {items.map((item) => (

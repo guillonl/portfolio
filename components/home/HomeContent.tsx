@@ -4,6 +4,7 @@ import { useState } from 'react'
 import { CategoryFilter } from '@/components/projects/CategoryFilter'
 import { ProjectList } from '@/components/projects/ProjectList'
 import { ProjectMeta, ProjectCategory } from '@/types/project'
+import { useLanguage } from '@/lib/i18n/LanguageContext'
 
 interface HomeContentProps {
   projects: ProjectMeta[]
@@ -11,11 +12,14 @@ interface HomeContentProps {
 
 export function HomeContent({ projects }: HomeContentProps) {
   const [filter, setFilter] = useState<ProjectCategory | 'All'>('All')
+  const { lang } = useLanguage()
 
+  // Filtrer par langue puis par catégorie
+  const projectsByLang = projects.filter((p) => p.lang === lang)
   const filteredProjects =
     filter === 'All'
-      ? projects
-      : projects.filter((p) => p.category === filter)
+      ? projectsByLang
+      : projectsByLang.filter((p) => p.category === filter)
 
   return (
     <section>

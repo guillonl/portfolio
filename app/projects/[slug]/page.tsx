@@ -39,7 +39,7 @@ export default async function ProjectPage({ params }: Props) {
 
   return (
     <ProjectLayout headings={project.headings}>
-      <article>
+      <article className="pt-8">
         <header className="mb-12">
           <h1 className="font-semibold mb-2">
             {project.meta.title}

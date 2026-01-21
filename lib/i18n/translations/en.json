@@ -1,0 +1,17 @@
+{
+  "bio": {
+    "name": "Leo Guillon",
+    "description": "Designer and developer crafting digital experiences. Currently focused on design systems and interactive interfaces."
+  },
+  "nav": {
+    "index": "Index"
+  },
+  "footer": {
+    "github": "GitHub",
+    "twitter": "Twitter",
+    "email": "Email"
+  },
+  "filter": {
+    "all": "All"
+  }
+}
