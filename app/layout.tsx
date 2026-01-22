@@ -2,6 +2,7 @@ import { Inter } from 'next/font/google'
 import { ThemeProvider } from 'next-themes'
 import { LanguageProvider } from '@/lib/i18n/LanguageContext'
 import { Header } from '@/components/layout/Header'
+import { DevTools } from '@/components/DevTools'
 import './globals.css'
 
 const inter = Inter({
@@ -35,6 +36,7 @@ export default function RootLayout({
           >
             <Header />
             <main className="pt-[var(--header-content-gap)]">{children}</main>
+            <DevTools />
           </ThemeProvider>
         </LanguageProvider>
       </body>
