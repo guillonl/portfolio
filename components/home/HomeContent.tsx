@@ -3,8 +3,8 @@
 import { useState } from 'react'
 import { CategoryFilter } from '@/components/projects/CategoryFilter'
 import { ProjectList } from '@/components/projects/ProjectList'
-import { ProjectMeta, ProjectCategory } from '@/types/project'
-import { useLanguage } from '@/lib/i18n/LanguageContext'
+import { ProjectMeta, ProjectCategory } from '@/_core/types/project'
+import { useLanguage } from '@/_core/lib/i18n/LanguageContext'
 
 interface HomeContentProps {
   projects: ProjectMeta[]

@@ -1,7 +1,7 @@
 'use client'
 
 import { AnimatePresence, motion } from 'framer-motion'
-import { ProjectMeta } from '@/types/project'
+import { ProjectMeta } from '@/_core/types/project'
 import { ProjectCard } from './ProjectCard'
 
 interface ProjectListProps {

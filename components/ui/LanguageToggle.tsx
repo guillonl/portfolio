@@ -2,7 +2,7 @@
 
 import { useRouter } from 'next/navigation'
 import { motion, AnimatePresence } from 'framer-motion'
-import { useLanguage } from '@/lib/i18n/LanguageContext'
+import { useLanguage } from '@/_core/lib/i18n/LanguageContext'
 
 export function LanguageToggle() {
   const { lang, setLang } = useLanguage()

@@ -2,8 +2,8 @@
 
 import { createContext, useContext, useState, useEffect, ReactNode } from 'react'
 import { setCookie, getCookie } from 'cookies-next'
-import fr from './translations/fr.json'
-import en from './translations/en.json'
+import fr from '@/content/copy/fr.json'
+import en from '@/content/copy/en.json'
 
 export type Language = 'fr' | 'en'
 type Translations = typeof fr

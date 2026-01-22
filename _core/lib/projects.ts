@@ -1,7 +1,7 @@
 import fs from 'fs'
 import path from 'path'
 import matter from 'gray-matter'
-import { ProjectMeta, ProjectCategory, Language } from '@/types/project'
+import { ProjectMeta, ProjectCategory, Language } from '@/_core/types/project'
 
 const projectsDirectory = path.join(process.cwd(), 'content/projects')
 

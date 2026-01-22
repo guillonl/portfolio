@@ -1,6 +1,6 @@
 'use client'
 
-import { useLanguage } from '@/lib/i18n/LanguageContext'
+import { useLanguage } from '@/_core/lib/i18n/LanguageContext'
 
 export function Bio() {
   const { t } = useLanguage()

@@ -1,9 +1,9 @@
 'use client'
 
 import { motion } from 'framer-motion'
-import { cn } from '@/lib/utils'
-import { ProjectCategory } from '@/types/project'
-import { useLanguage } from '@/lib/i18n/LanguageContext'
+import { cn } from '@/_core/lib/utils'
+import { ProjectCategory } from '@/_core/types/project'
+import { useLanguage } from '@/_core/lib/i18n/LanguageContext'
 
 const categories = ['All', 'UI', 'UX', 'Code'] as const
 

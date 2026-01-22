@@ -1,6 +1,6 @@
 import Link from 'next/link'
-import { ProjectMeta } from '@/types/project'
-import { cn } from '@/lib/utils'
+import { ProjectMeta } from '@/_core/types/project'
+import { cn } from '@/_core/lib/utils'
 
 const categoryColors = {
   UI: 'text-ui',

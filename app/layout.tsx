@@ -1,6 +1,6 @@
 import { Inter } from 'next/font/google'
 import { ThemeProvider } from 'next-themes'
-import { LanguageProvider } from '@/lib/i18n/LanguageContext'
+import { LanguageProvider } from '@/_core/lib/i18n/LanguageContext'
 import { Header } from '@/components/layout/Header'
 import { DevTools } from '@/components/DevTools'
 import './globals.css'

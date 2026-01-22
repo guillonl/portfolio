@@ -3,7 +3,7 @@
 import { ReactNode } from 'react'
 import { TableOfContents } from './TableOfContents'
 import { Container } from '@/components/ui/Container'
-import { TocItem } from '@/lib/projects'
+import { TocItem } from '@/_core/lib/projects'
 
 interface ProjectLayoutProps {
   children: ReactNode

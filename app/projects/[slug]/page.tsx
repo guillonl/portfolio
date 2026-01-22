@@ -1,10 +1,10 @@
 import { notFound } from 'next/navigation'
 import { cookies } from 'next/headers'
-import { getProjectBySlug, getAllProjects } from '@/lib/projects'
+import { getProjectBySlug, getAllProjects } from '@/_core/lib/projects'
 import { MDXRemote } from 'next-mdx-remote/rsc'
 import { mdxComponents } from '@/components/mdx/MDXComponents'
 import { ProjectLayout } from '@/components/projects/ProjectLayout'
-import type { Language } from '@/lib/i18n/LanguageContext'
+import type { Language } from '@/_core/lib/i18n/LanguageContext'
 
 export const dynamic = 'force-dynamic'
 

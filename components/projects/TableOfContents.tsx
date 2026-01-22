@@ -3,8 +3,8 @@
 import { useState, useEffect } from 'react'
 import { motion } from 'framer-motion'
 import Link from 'next/link'
-import { cn } from '@/lib/utils'
-import { useLanguage } from '@/lib/i18n/LanguageContext'
+import { cn } from '@/_core/lib/utils'
+import { useLanguage } from '@/_core/lib/i18n/LanguageContext'
 
 interface TocItem {
   id: string
