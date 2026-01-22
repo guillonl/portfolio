@@ -34,7 +34,7 @@ export default function RootLayout({
             disableTransitionOnChange
           >
             <Header />
-            <main>{children}</main>
+            <main className="pt-[var(--header-content-gap)]">{children}</main>
           </ThemeProvider>
         </LanguageProvider>
       </body>
