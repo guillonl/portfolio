@@ -6,7 +6,7 @@ export function Bio() {
   const { t } = useLanguage()
 
   return (
-    <section className="py-8">
+    <section className="pb-8">
       <h1 className="font-semibold">{t.bio.name}</h1>
       <p className="text-muted leading-relaxed mt-4">{t.bio.description}</p>
     </section>

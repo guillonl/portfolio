@@ -115,3 +115,9 @@ export async function getProjectBySlug(slug: string, lang: Language = 'fr') {
     headings,
   }
 }
+
+export async function getProjectBySlugAllLangs(slug: string) {
+  const fr = await getProjectBySlug(slug, 'fr')
+  const en = await getProjectBySlug(slug, 'en')
+  return { fr, en }
+}

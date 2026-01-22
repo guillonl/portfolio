@@ -1,13 +1,17 @@
 'use client'
 
+import { useRouter } from 'next/navigation'
 import { motion, AnimatePresence } from 'framer-motion'
 import { useLanguage } from '@/lib/i18n/LanguageContext'
 
 export function LanguageToggle() {
   const { lang, setLang } = useLanguage()
+  const router = useRouter()
 
   const handleToggle = () => {
-    setLang(lang === 'fr' ? 'en' : 'fr')
+    const newLang = lang === 'fr' ? 'en' : 'fr'
+    setLang(newLang)
+    router.refresh()
   }
 
   return (

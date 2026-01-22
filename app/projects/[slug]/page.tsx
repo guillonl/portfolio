@@ -14,7 +14,8 @@ interface Props {
 
 export async function generateStaticParams() {
   const projects = await getAllProjects()
-  return projects.map((project) => ({ slug: project.slug }))
+  const uniqueSlugs = Array.from(new Set(projects.map((p) => p.slug)))
+  return uniqueSlugs.map((slug) => ({ slug }))
 }
 
 export async function generateMetadata({ params }: Props) {
@@ -42,11 +43,9 @@ export default async function ProjectPage({ params }: Props) {
 
   return (
     <ProjectLayout headings={project.headings}>
-      <article className="pt-8">
+      <article>
         <header className="mb-12">
-          <h1 className="font-semibold mb-2">
-            {project.meta.title}
-          </h1>
+          <h1 className="font-semibold mb-2">{project.meta.title}</h1>
           <time className="text-sm text-muted">
             {new Date(project.meta.date).toLocaleDateString(dateLocale, {
               day: 'numeric',
