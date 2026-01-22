@@ -18,9 +18,7 @@ export function ProjectLayout({ children, headings }: ProjectLayoutProps) {
 
       {/* Contenu centré exactement comme la home */}
       <Container>
-        <main>
-          {children}
-        </main>
+        {children}
       </Container>
     </>
   )
