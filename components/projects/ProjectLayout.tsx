@@ -12,14 +12,12 @@ interface ProjectLayoutProps {
 
 export function ProjectLayout({ children, headings }: ProjectLayoutProps) {
   return (
-    <>
-      {/* Navigation latérale fixe - n'affecte pas le flow */}
+    <Container className="relative">
+      {/* TOC positionné à gauche du Container */}
       <TableOfContents items={headings} />
 
-      {/* Contenu centré exactement comme la home */}
-      <Container>
-        {children}
-      </Container>
-    </>
+      {/* Contenu */}
+      {children}
+    </Container>
   )
 }
