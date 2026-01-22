@@ -21,7 +21,7 @@
 
   /* Layout Alignment Rule */
   --header-height: 64px;  /* py-8 = 32px top + 32px bottom */
-  --content-top: var(--header-height); /* Aligné avec le début du contenu */
+  --content-top: 78px; /* Header + ajustement baseline */
 
   /* Typography */
   --font-size-base: 0.875rem;
