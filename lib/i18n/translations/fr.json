@@ -8,8 +8,8 @@
   },
   "footer": {
     "github": "GitHub",
-    "twitter": "Twitter",
-    "email": "Email"
+    "substack": "Substack",
+    "linkedin": "LinkedIn"
   },
   "filter": {
     "all": "Tous"

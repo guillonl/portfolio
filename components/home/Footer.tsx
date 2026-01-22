@@ -9,7 +9,7 @@ export function Footer() {
     <footer className="py-8 border-t border-border">
       <nav className="flex gap-6 text-sm">
         <a
-          href="https://github.com/leoguillon"
+          href="https://github.com/guillonl"
           target="_blank"
           rel="noopener noreferrer"
           className="text-muted hover:text-foreground transition-colors"
@@ -17,18 +17,20 @@ export function Footer() {
           {t.footer.github}
         </a>
         <a
-          href="https://twitter.com/leoguillon"
+          href="https://substack.com/@leoguillon"
           target="_blank"
           rel="noopener noreferrer"
           className="text-muted hover:text-foreground transition-colors"
         >
-          {t.footer.twitter}
+          {t.footer.substack}
         </a>
         <a
-          href="mailto:hello@leoguillon.com"
+          href="https://www.linkedin.com/in/leoguillon/"
+          target="_blank"
+          rel="noopener noreferrer"
           className="text-muted hover:text-foreground transition-colors"
         >
-          {t.footer.email}
+          {t.footer.linkedin}
         </a>
       </nav>
     </footer>
