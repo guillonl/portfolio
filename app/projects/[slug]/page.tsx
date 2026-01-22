@@ -1,15 +1,12 @@
 import { notFound } from 'next/navigation'
+import { cookies } from 'next/headers'
 import { getProjectBySlug, getAllProjects } from '@/lib/projects'
 import { MDXRemote } from 'next-mdx-remote/rsc'
 import { mdxComponents } from '@/components/mdx/MDXComponents'
 import { ProjectLayout } from '@/components/projects/ProjectLayout'
-import { cn } from '@/lib/utils'
+import type { Language } from '@/lib/i18n/LanguageContext'
 
-const categoryColors = {
-  UI: 'bg-ui/10 text-ui',
-  UX: 'bg-ux/10 text-ux',
-  Code: 'bg-code/10 text-code',
-}
+export const dynamic = 'force-dynamic'
 
 interface Props {
   params: Promise<{ slug: string }>
@@ -22,7 +19,9 @@ export async function generateStaticParams() {
 
 export async function generateMetadata({ params }: Props) {
   const { slug } = await params
-  const project = await getProjectBySlug(slug)
+  const cookieStore = await cookies()
+  const lang = (cookieStore.get('lang')?.value as Language) || 'fr'
+  const project = await getProjectBySlug(slug, lang)
   if (!project) return {}
 
   return {
@@ -33,9 +32,13 @@ export async function generateMetadata({ params }: Props) {
 
 export default async function ProjectPage({ params }: Props) {
   const { slug } = await params
-  const project = await getProjectBySlug(slug)
+  const cookieStore = await cookies()
+  const lang = (cookieStore.get('lang')?.value as Language) || 'fr'
+  const project = await getProjectBySlug(slug, lang)
 
   if (!project) notFound()
+
+  const dateLocale = lang === 'fr' ? 'fr-FR' : 'en-US'
 
   return (
     <ProjectLayout headings={project.headings}>
@@ -45,7 +48,7 @@ export default async function ProjectPage({ params }: Props) {
             {project.meta.title}
           </h1>
           <time className="text-sm text-muted">
-            {new Date(project.meta.date).toLocaleDateString('en-US', {
+            {new Date(project.meta.date).toLocaleDateString(dateLocale, {
               day: 'numeric',
               month: 'long',
               year: 'numeric',
