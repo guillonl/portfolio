@@ -1,5 +1,6 @@
 import { Inter } from 'next/font/google'
 import { ThemeProvider } from 'next-themes'
+import { Analytics } from '@vercel/analytics/next'
 import { LanguageProvider } from '@/_core/lib/i18n/LanguageContext'
 import { Header } from '@/components/layout/Header'
 import { DevTools } from '@/components/DevTools'
@@ -39,6 +40,7 @@ export default function RootLayout({
             <DevTools />
           </ThemeProvider>
         </LanguageProvider>
+        <Analytics />
       </body>
     </html>
   )
