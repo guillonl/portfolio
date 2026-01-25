@@ -1,8 +1,8 @@
+import { headers } from 'next/headers'
 import { AgentContent } from './types'
 
 const GITHUB_BASE_URL = 'https://raw.githubusercontent.com/guillonl/ux-folder-files/main/agents'
 
-// Version serveur : utilise fs pour lire les fichiers locaux
 export async function fetchAgentContent(githubPath: string, lang: 'fr' | 'en' = 'fr'): Promise<string> {
   // Pour le français, utiliser GitHub directement
   if (lang === 'fr') {
@@ -17,14 +17,21 @@ export async function fetchAgentContent(githubPath: string, lang: 'fr' | 'en' = 
     return response.text()
   }
 
-  // Pour l'anglais côté serveur, lire via filesystem
+  // Pour l'anglais
+  // Côté serveur, utiliser fetch avec le host de la requête
   if (typeof window === 'undefined') {
     try {
-      const fs = await import('fs/promises')
-      const path = await import('path')
-      const filePath = path.join(process.cwd(), 'public', 'agents-en', githubPath)
-      const content = await fs.readFile(filePath, 'utf-8')
-      return content
+      const headersList = await headers()
+      const host = headersList.get('host')
+      if (host) {
+        const protocol = host.includes('localhost') ? 'http' : 'https'
+        const response = await fetch(`${protocol}://${host}/agents-en/${githubPath}`, {
+          cache: 'no-store'
+        })
+        if (response.ok) {
+          return response.text()
+        }
+      }
     } catch {
       // Fallback sur la version française
     }
