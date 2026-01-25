@@ -1,7 +1,9 @@
 {
   "bio": {
     "name": "Leo Guillon",
-    "description": "Designer et développeur créant des expériences digitales. Actuellement concentré sur les design systems et les interfaces interactives."
+    "role": "UX Designer chez <a href=\"https://blacheyong.com/\" target=\"_blank\" rel=\"noopener noreferrer\">Blache Yong & Co</a> et Design Engineer pour mes projets perso.",
+    "description": "Je conçois des interfaces, je construis des outils et je documente ce que j'apprends en chemin. J'accorde de l'importance au craft et à la simplicité, et j'aime créer des choses agréables à utiliser.",
+    "history": "Avant, j'ai travaillé chez Tymate (agence) puis Dilypse (startup). Tu peux me retrouver sur <a href=\"https://www.linkedin.com/in/leoguillon/\" target=\"_blank\" rel=\"noopener noreferrer\">LinkedIn</a>, <a href=\"https://substack.com/@leoguillon\" target=\"_blank\" rel=\"noopener noreferrer\">Substack</a>, ou voir mon travail sur <a href=\"https://github.com/guillonl\" target=\"_blank\" rel=\"noopener noreferrer\">GitHub</a>."
   },
   "nav": {
     "index": "Retour"
@@ -13,5 +15,9 @@
   },
   "filter": {
     "all": "Tous"
+  },
+  "uxAgents": {
+    "howToUse": "Comment l'utiliser",
+    "download": "Télécharger .md"
   }
 }
