@@ -5,6 +5,9 @@ import { fetchAgentContent } from '@/_core/lib/ux-agents/fetchAgent'
 import { AgentPageContent } from '@/components/ux-agents/AgentPageContent'
 import type { Language } from '@/_core/lib/i18n/LanguageContext'
 
+// Force dynamic rendering to read cookies on each request
+export const dynamic = 'force-dynamic'
+
 interface Props {
   params: Promise<{ category: string; agent: string }>
 }

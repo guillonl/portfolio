@@ -2,6 +2,9 @@ import { cookies } from 'next/headers'
 import type { Language } from '@/_core/lib/i18n/LanguageContext'
 import { HowToUseContent } from '@/components/ux-agents/HowToUseContent'
 
+// Force dynamic rendering to read cookies on each request
+export const dynamic = 'force-dynamic'
+
 export const metadata = {
   title: 'UX Agents - How to Use',
 }
