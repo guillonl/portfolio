@@ -1,5 +1,5 @@
 import { notFound } from 'next/navigation'
-import { cookies } from 'next/headers'
+import { cookies, headers } from 'next/headers'
 import { getAgentBySlug, AGENT_CATEGORIES, AGENTS } from '@/_core/lib/ux-agents/agents'
 import { fetchAgentContent } from '@/_core/lib/ux-agents/fetchAgent'
 import { AgentPageContent } from '@/components/ux-agents/AgentPageContent'
@@ -33,7 +33,9 @@ export async function generateMetadata({ params }: Props) {
 export default async function AgentPage({ params }: Props) {
   const { category, agent: agentSlug } = await params
   const cookieStore = await cookies()
+  const headersList = await headers()
   const lang = (cookieStore.get('lang')?.value as Language) || 'fr'
+  const host = headersList.get('host') || ''
 
   const validCategory = AGENT_CATEGORIES.find(c => c.id === category)
   if (!validCategory) notFound()
@@ -43,7 +45,7 @@ export default async function AgentPage({ params }: Props) {
 
   let prompt: string
   try {
-    prompt = await fetchAgentContent(agent.githubPath, lang)
+    prompt = await fetchAgentContent(agent.githubPath, lang, host)
   } catch {
     notFound()
   }

@@ -1,9 +1,8 @@
-import { headers } from 'next/headers'
 import { AgentContent } from './types'
 
 const GITHUB_BASE_URL = 'https://raw.githubusercontent.com/guillonl/ux-folder-files/main/agents'
 
-export async function fetchAgentContent(githubPath: string, lang: 'fr' | 'en' = 'fr'): Promise<string> {
+export async function fetchAgentContent(githubPath: string, lang: 'fr' | 'en' = 'fr', host?: string): Promise<string> {
   // Pour le français, utiliser GitHub directement
   if (lang === 'fr') {
     const response = await fetch(`${GITHUB_BASE_URL}/${githubPath}`, {
@@ -18,24 +17,20 @@ export async function fetchAgentContent(githubPath: string, lang: 'fr' | 'en' = 
   }
 
   // Pour l'anglais
-  // Côté serveur, utiliser fetch avec le host de la requête
-  if (typeof window === 'undefined') {
+  // Côté serveur avec host fourni
+  if (typeof window === 'undefined' && host) {
     try {
-      const headersList = await headers()
-      const host = headersList.get('host')
-      if (host) {
-        const protocol = host.includes('localhost') ? 'http' : 'https'
-        const response = await fetch(`${protocol}://${host}/agents-en/${githubPath}`, {
-          cache: 'no-store'
-        })
-        if (response.ok) {
-          return response.text()
-        }
+      const protocol = host.includes('localhost') ? 'http' : 'https'
+      const response = await fetch(`${protocol}://${host}/agents-en/${githubPath}`, {
+        cache: 'no-store'
+      })
+      if (response.ok) {
+        return response.text()
       }
     } catch {
       // Fallback sur la version française
     }
-  } else {
+  } else if (typeof window !== 'undefined') {
     // Côté client, fetch depuis /agents-en/
     try {
       const response = await fetch(`/agents-en/${githubPath}`)
