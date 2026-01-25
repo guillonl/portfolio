@@ -30,7 +30,7 @@ export function LanguageProvider({ children }: { children: ReactNode }) {
 
   const setLang = (newLang: Language) => {
     setLangState(newLang)
-    setCookie('lang', newLang, { maxAge: 60 * 60 * 24 * 365 })
+    setCookie('lang', newLang, { maxAge: 60 * 60 * 24 * 365, path: '/' })
   }
 
   return (

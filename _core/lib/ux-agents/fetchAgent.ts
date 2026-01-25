@@ -7,6 +7,10 @@ function getBaseUrl(): string {
   if (typeof window !== 'undefined') {
     return '' // Côté client, chemin relatif
   }
+  // En production sur Vercel, utiliser VERCEL_URL
+  if (process.env.VERCEL_URL) {
+    return `https://${process.env.VERCEL_URL}`
+  }
   return process.env.NEXT_PUBLIC_BASE_URL || 'http://localhost:3000'
 }
 
